@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int count;
+
+void heapify(int h[20],int n)
+{
+  int i,k,v,flag,j;
+  for(i=n/2;i>=1;i--)
+  {
+    k=i;
+    v=h[k];
+    flag=0;
+    while(!flag && (2*k<=n))
+    {
+      j=2*k;
+      if(j<n)
+        if(h[j]<h[j+1])
+        {
+          j=j+1;
+        }
+      count++;
+      if(v>=h[j])
+        flag=1;
+      else
+      {
+        h[k]=h[j];
+        k=j;
+      }
+    }
+    h[k]=v;
+  }
+}
+void heapsort(int h[20],int n)
+{
+  int i,j,temp;
+  for(i=n;i>=1;i--)
+  {
+    temp=h[1];
+    h[1]=h[i];
+    h[i]=temp;
+    heapify(h,i-1);
+  }
+}
+void main()
+{
+  int h[20],n,i,j;
+  printf("\n Enter the number of elements to be sorted:");
+  scanf("%d",&n);
+  printf("\n Enter the elements to be sorted\n");
+  for(i=1;i<=n;i++)
+    scanf("%d",&h[i]);
+  heapify(h,n);
+  heapsort(h,n);
+  printf("\n Elements after sorting\n");
+  for(i=1;i<=n;i++)
+    printf("\n%d",h[i]);
+  printf("\n number of counts: %d\n",count);
+  return 0;
+}
