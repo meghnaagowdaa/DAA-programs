@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int count;
+int Bform(char T[20], char P[10])
+{
+    int m,n,i,j;
+    n=strlen(T);
+    m=strlen(P);
+    for(i=0;i<=n-m;i++)
+    {
+        j=0;
+        while(j<m && P[j]==T[i+j])
+        {
+            j=j+1;
+            count++;
+        }
+        count++;
+        if(j==m)
+            return i+1;
+
+    }
+    return -1;
+}
+int main()
+{
+    char T[20], P[20];
+    int a;
+    printf("\nRead text:\n");
+    scanf("%s", &T);
+    printf("\nRead pattern:\n");
+    scanf("%s", &P);
+    a=Bform(T,P);
+    if(a==-1)
+        printf("Pattern not found\n");
+    else
+        printf("Pattern found at the location %d\n", a);
+    printf("The Number of Comparisons=%d", count);
+}
